@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="ie"><![endif]-->
+<!--[if gte IE 9]><!-->
+<html>
+<!--<![endif]-->
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>HelioBox - FancyBox Ligero</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="HelioBox - FancyBox Liger" />
+    <link type="image/x-icon" rel="shortcut icon" href="images/favicon.png">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  
+
+    <style type="text/css">
+    /*Estilos HelioBox*/
+    #heliobox-background { position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; z-index: 9999999; background: #000; text-align: center; opacity: .5; display: none; }
+    #heliobox-wrapper { position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; z-index: 99999999; text-align: center; overflow: hidden; display: none; }
+    #heliobox-wrapper #heliobox-content { width: 600px; height: 625px; margin: 0px auto; display: inline-block; margin-top: 50px; position: relative; background: transparent url(heliobox-loading.gif) no-repeat center center; }
+    #heliobox-wrapper #heliobox-content #heliobox-close { width: 30px; height: 30px; position: absolute; right: -15px; top: -15px; z-index: 2; background: transparent url(heliobox-cerrar.png) no-repeat center center; }
+    #heliobox-wrapper #heliobox-content #heliobox-iframe { width: 100%; height: 100%; position: absolute; left: 0px; top: 0px; z-index: 1; }
+    #heliobox-wrapper #heliobox-content #heliobox-iframe iframe { margin: 0px; padding: 0px; border: 0px; width: 100%; height: 100%; background: none; overflow: hidden; }
+    /*Fin*/
+    body, h1 { margin: 0; padding: 0; }
+    #HelioBox1, #HelioBox2, #HelioBox3, #HelioBox4 { margin: 30px 0 }
+    #HelioBox1, #HelioBox2, #HelioBox3, #HelioBox4, h1 { display: block; font-size: 40px; text-align: center; text-decoration: none; color: #666 }
+
+
+      
+    </style>
+
+    <script type="text/javascript">
+
+				
+
+		jQuery.fn.heliobox=function(values){
+				var val = jQuery.extend({}, jQuery.fn.heliobox.defaults, values);
+			    this.each(function(){  
+					jQuery("body").append('<div id="heliobox-background"></div><div id="heliobox-wrapper"><div id="heliobox-content"><a href="javascript:void(0);" id="heliobox-close"></a><div id="heliobox-iframe"></div></div></div>');
+			        jQuery(this).click(function(e){  
+			        	e.preventDefault();
+			        	 
+			        	//$('body').css('height',$(document).height())
+			        	jQuery("body").css({ 'overflow': 'hidden','position':'relative', 'height':+ jQuery(document).height()+'px' });
+			        	jQuery("#heliobox-background").css({'display':'block', 'background': val.background, 'opacity':(val.opacity/100) , 'filter':'alpha(opacity='+val.opacity+')'});//
+						jQuery("#heliobox-wrapper").css('display','block');
+						
+					    jQuery('#heliobox-content').css({'width': val.width+'px', 'height':val.height+'px', 'top':(jQuery(window).scrollTop()+20)+'px'});//
+
+						jQuery("#heliobox-iframe").css({'width':val.width+'px', 'height':val.height+'px'}).html("").append('<iframe src="'+jQuery(this).attr('href')+'"></iframe>');
+
+						jQuery("#heliobox-close").on('click',function(){ jQuery("#heliobox-background,#heliobox-wrapper,body").removeAttr('style');});
+						return(false);
+			        });  
+			    }); 
+			};
+
+			jQuery.fn.heliobox.defaults={
+				background: "#000",
+				opacity: 50,
+				width: 620,
+				height:700,
+				type:"iframe",
+			};
+
+
+		jQuery(document).ready(function() {
+			jQuery("#HelioBox1").heliobox({width:610,height:656});
+			jQuery("#HelioBox2").heliobox({width:610,height:656,background:"#F00"});
+            jQuery("#HelioBox3").heliobox({width:610,height:656,opacity:80});
+			jQuery("#HelioBox4").heliobox();
+			
+		});
+
+    </script>
+
+</head>
+<body lang="es">
+    <h1>
+        Helio Box</h1>
+    <a id="HelioBox1" href="http://www.omnicancun.com.mx/_lib/recursos/msi/msi.html">Overlay      con Ancho y Alto Personalizados</a> 
+    <a id="HelioBox2" href="http://www.omnicancun.com.mx/_lib/recursos/msi/msi.html">     Overlay Con Background</a> 
+    <a id="HelioBox3" href="http://www.omnicancun.com.mx/_lib/recursos/msi/msi.html">             Overlay Con Opacidad</a>
+    <a id="HelioBox4" href="http://www.omnicancun.com.mx/_lib/recursos/msi/msi.html">             Overlay Default</a>
+
+</body>
+</html>
