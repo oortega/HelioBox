@@ -56,7 +56,8 @@
 
 						jQuery("#heliobox-iframe").css({'width':val.width+'px', 'height':val.height+'px'}).html("").append('<iframe src="'+jQuery(this).attr('href')+'"></iframe>');
 
-						jQuery("#heliobox-close").on('click',function(){ jQuery("#heliobox-background,#heliobox-wrapper,body").removeAttr('style');});
+						jQuery("#heliobox-background,#heliobox-wrapper,#heliobox-close").on('click',function(){ jQuery("#heliobox-background,#heliobox-wrapper,body").removeAttr('style');});
+
 						return(false);
 			        });  
 			    }); 
