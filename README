@@ -1,8 +1,3 @@
-# HTML, CSS, JavaScript and JSON code formatter for Sublime Text 2 and 3 via node.js
-#### [Sublime Text 3](http://www.sublimetext.com/3)
-#### [JS-beautify](https://github.com/einars/js-beautify)
-#### [Node.js download](http://nodejs.org/#download)
-
 # HelioBox
 
 
@@ -10,12 +5,12 @@
 
 *HelioBox con valores ancho y alto personalizados
 
-```Html
+``` Html
 <a id="HelioBox1" href="http://www.omnicancun.com.mx/_lib/recursos/msi/msi.html">Overlay Con Ancho y Alto Personalizados</a>
 
 ```
 
-```javascript
+``` javascript
 jQuery(document).ready(function() {
         jQuery("#HelioBox1").heliobox({
             width: 610,
