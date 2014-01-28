@@ -13,67 +13,17 @@
 
 
     <style type="text/css">
-    body{ margin: 0; padding: 0;}
+    body {
+        margin: 0;
+        padding: 0;
+    }
     /*Estilos HelioBox*/
-    #heliobox-background {
-         position: absolute;
-        left: 0px;
-        top: 0px;
-        width: 100%;
-        height: 100%;
-        z-index: 9999999;
-        background: #000;
-        text-align: center;
-        opacity: .5;
-        display: none;
-       
-    }
     #heliobox-background { position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; z-index: 9999999; background: #000; text-align: center; opacity: .5; display: none; }
-    #heliobox-wrapper {
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        width: 100%;
-        height: 100%;
-        z-index: 99999999;
-        text-align: center;
-        /*  overflow: hidden;*/
-        display: none;
-    }
-    #heliobox-wrapper #heliobox-content {
-        width: 600px;
-        height: 625px;
-        *margin: 0px auto;
-        *display: inline-block;
-        position: relative;
-        background: transparent url(heliobox-loading.gif) no-repeat center center;
-    }
-    #heliobox-wrapper #heliobox-content #heliobox-close {
-        width: 30px;
-        height: 30px;
-        position: absolute;
-        right: -15px;
-        top: -15px;
-        z-index: 2;
-        background: transparent url(heliobox-cerrar.png) no-repeat center center;
-    }
-    #heliobox-wrapper #heliobox-content #heliobox-iframe {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        z-index: 1;
-    }
-    #heliobox-wrapper #heliobox-content #heliobox-iframe iframe {
-        margin: 0px;
-        padding: 0px;
-        border: 0px;
-        width: 100%;
-        height: 100%;
-        background: none;
-        overflow: hidden;
-    }
+    #heliobox-wrapper { position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; z-index: 99999999; text-align: center; /*  overflow: hidden;*/ display: none; }
+    #heliobox-wrapper #heliobox-content { width: 600px; height: 625px;  *margin: 0px auto; *display: inline-block;position: relative; background: transparent url(heliobox-loading.gif) no-repeat center center; }
+    #heliobox-wrapper #heliobox-content #heliobox-close { width: 30px; height: 30px; position: absolute; right: -15px; top: -15px; z-index: 2; background: transparent url(heliobox-cerrar.png) no-repeat center center; }
+    #heliobox-wrapper #heliobox-content #heliobox-iframe { width: 100%; height: 100%; position: absolute; left: 0px; top: 0px; z-index: 1; }
+    #heliobox-wrapper #heliobox-content #heliobox-iframe iframe { margin: 0px; padding: 0px; border: 0px; width: 100%; height: 100%; background: none; overflow: hidden; }
     /*Fin*/
     h1 {
         margin: 0;
@@ -89,124 +39,95 @@
         text-decoration: none;
         color: #666
     }
-    #wrapperx{
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        width: 2000px;
-        height: 2000px;
-        z-index: 9999999;
-        background: #000;
-        text-align: center;
-        opacity: .5;
-        display: block;
-        background: azure;}
- 
     </style>
-
     <script type="text/javascript">
-        jQuery.fn.heliobox = function(values) {
-            var val = jQuery.extend({}, jQuery.fn.heliobox.defaults, values);
-            this.each(function() {
+    jQuery.fn.heliobox = function(values) {
+        var val = jQuery.extend({}, jQuery.fn.heliobox.defaults, values);
+        return this.each(function() {
+            if(jQuery("#heliobox-background").length==0 ) {
                 jQuery("body").append('<div id="heliobox-background"></div><div id="heliobox-wrapper"><div id="heliobox-content"><a href="javascript:void(0);" id="heliobox-close"></a><div id="heliobox-iframe"></div></div></div>');
-                jQuery(this).click(function(e) {
-                    e.preventDefault();
-
-                    var bodyh=jQuery(document).height();
-                    var windowh=jQuery(window).height();
-                    var bodyw=jQuery(window.document).width();
-                    var windowW=jQuery(window).width();
-
-                    console.log(bodyh+"window"+windowh);
-                    jQuery("#heliobox-background").css({
-                        'height': bodyh>windowh?bodyh:windowh,
-                        'width': bodyw>windowW?bodyw:windowW,
-                        'display': 'block',
-                        'background': val.background,
-                        'opacity': (val.opacity / 100),
-                        
-                        'filter': 'alpha(opacity=' + val.opacity + ')'
-                    }); 
-                    jQuery("#heliobox-wrapper").css({'display': 'block'});
-
-                    jQuery('#heliobox-content').css({
-                        'width': val.width + 'px',
-                        'height': val.height + 'px'
-                    }); //
-
-                    jQuery("#heliobox-iframe").css({
-                        'width': val.width + 'px',
-                        'height': val.height + 'px'
-                    }).html("").append('<iframe src="' + jQuery(this).attr('href') + '"></iframe>');
-
-                    repositionOverlay();
-                    $(window).on("resize", repositionOverlay);
-
-                    $(window).on("scroll", repositionOverlay);
-                    
-
-                    jQuery("#heliobox-background,#heliobox-close,#heliobox-wrapper").on('click', function() {
-                        jQuery("#heliobox-background,#heliobox-wrapper,body").removeAttr('style');
-                        jQuery("#heliobox-iframe").html("");
-                        $(window).off("resize", repositionOverlay);
-                        $(window).off("scroll", repositionOverlay);
-                    });
-
-
-                    return (false);
+            }
+            jQuery(this).click(function(e) {
+                e.preventDefault();
+                var bodyh = jQuery(document).height();
+                var windowh = jQuery(window).height();
+                var bodyw = jQuery(window.document).width();
+                var windowW = jQuery(window).width();
+                jQuery("#heliobox-background").css({
+                    'height': bodyh > windowh ? bodyh : windowh,
+                    'width': bodyw > windowW ? bodyw : windowW,
+                    'display': 'block',
+                    'background': val.background,
+                    'opacity': (val.opacity / 100),
+                    'filter': 'alpha(opacity=' + val.opacity + ')'
+                });
+                jQuery("#heliobox-wrapper").css({
+                    'display': 'block'
                 });
 
-               
+                jQuery('#heliobox-content').css({
+                    'width': val.width + 'px',
+                    'height': val.height + 'px'
+                }); 
+
+                jQuery("#heliobox-iframe").css({
+                    'width': val.width + 'px',
+                    'height': val.height + 'px'
+                }).html("").append('<iframe src="' + jQuery(this).attr('href') + '"></iframe>');
+
+                repositionOverlay();
+                $(window).on("resize", repositionOverlay);
+                $(window).on("scroll", repositionOverlay);
+                jQuery("#heliobox-background,#heliobox-close,#heliobox-wrapper").on('click', function() {
+                    jQuery("#heliobox-background,#heliobox-wrapper,body").removeAttr('style');
+                    jQuery("#heliobox-iframe").html("");
+                    $(window).off("resize", repositionOverlay);
+                    $(window).off("scroll", repositionOverlay);
+                });
+                return (false);
             });
-
-            function repositionOverlay() {
-                var wh = jQuery(window).height();
-                var oh = jQuery("#heliobox-content").height();
-                var sh = jQuery(window).scrollTop();
-                var w = jQuery(window).width();
-                var cw = jQuery("#heliobox-content").width();
-                var sw = jQuery(window).scrollLeft();
-
-                jQuery("#heliobox-content").finish();
-                jQuery("#heliobox-content").animate({
-                    "margin-top": wh > oh ? (((wh - oh) / 2) + sh) + "px" : "0px",
-                    "margin-left": w > cw ? (((w-cw ) / 2)) +sw+"px" : "0px" 
-                   
-                },300);
-             
-
-
-            }
-        };
-
-        jQuery.fn.heliobox.defaults = {
-            background: "#000",
-            opacity: 50,
-            width: 620,
-            height: 700,
-            type: "iframe"
-        };
-
-
-        jQuery(document).ready(function() {
-           jQuery("#HelioBox1").heliobox({
-                width: 610,
-                height: 656
-            });
-            jQuery("#HelioBox2").heliobox({
-                width: 610,
-                height: 656,
-                background: "#F00"
-            });
-            jQuery("#HelioBox3").heliobox({
-                width: 610,
-                height: 656,
-                opacity: 80
-            });
-            jQuery("#HelioBox4").heliobox();
 
 
         });
+        function repositionOverlay() {
+            var wh = jQuery(window).height();
+            var oh = jQuery("#heliobox-content").height();
+            var sh = jQuery(window).scrollTop();
+            var w = jQuery(window).width();
+            var cw = jQuery("#heliobox-content").width();
+            var sw = jQuery(window).scrollLeft();
+            jQuery("#heliobox-content").finish();
+            jQuery("#heliobox-content").animate({
+                "margin-top": wh > oh ? (((wh - oh) / 2) + sh) + "px" : "0px",
+                "margin-left": w > cw ? (((w - cw) / 2)) + sw + "px" : "0px"
+            }, 300);
+        }
+    };
+
+    jQuery.fn.heliobox.defaults = {
+        background: "#000",
+        opacity: 50,
+        width: 620,
+        height: 700,
+        type: "iframe"
+    };
+    jQuery(document).ready(function() {
+        jQuery("#HelioBox1").heliobox({
+            width: 610,
+            height: 656
+        });
+        jQuery("#HelioBox2").heliobox({
+            width: 610,
+            height: 656,
+            background: "#F00"
+        });
+        jQuery("#HelioBox3").heliobox({
+            width: 610,
+            height: 656,
+            opacity: 80
+        });
+        jQuery("#HelioBox4").heliobox();
+    });
     </script>
 
 </head>
