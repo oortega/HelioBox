@@ -1,12 +1,29 @@
-HelioBox V1.0
+# HelioBox
 
-FancyBox Ligero
 
-Autores :
+## Guia Rapida
 
-Julian Tun
-Oscar Ortega @oort3ga
-Alan Orlaineta
+*HelioBox con valores ancho y alto personalizados
 
-Soporte para 
+```Html
+<a id="HelioBox1" href="http://www.omnicancun.com.mx/_lib/recursos/msi/msi.html">Overlay Con Ancho y Alto Personalizados</a>
+
+```
+
+```javascript
+jQuery(document).ready(function() {
+        jQuery("#HelioBox1").heliobox({
+            width: 610,
+            height: 656
+        });
+```
+
+
+## Autores
+*Julian Tun
+*Oscar Ortega @oort3ga
+*Alan Orlaineta
+
+##Soporte
+
 IE+6,Firefox+3.5,Chrome
